@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmsActivator.Abstractions", "src\SmsActivator.Abstractions\SmsActivator.Abstractions.csproj", "{A7144430-A816-4CF8-98BE-D5BF35969115}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmsActivator.SmsHub", "src\SmsActivator.SmsHub\SmsActivator.SmsHub.csproj", "{E8BD6057-EA58-46DE-9CC6-087611C09D8C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmsActivator.ConsoleApp", "src\SmsActivator.ConsoleApp\SmsActivator.ConsoleApp.csproj", "{FE1B0E50-00C4-4723-9347-A6BFC907FC4D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A7144430-A816-4CF8-98BE-D5BF35969115}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A7144430-A816-4CF8-98BE-D5BF35969115}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A7144430-A816-4CF8-98BE-D5BF35969115}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A7144430-A816-4CF8-98BE-D5BF35969115}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E8BD6057-EA58-46DE-9CC6-087611C09D8C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E8BD6057-EA58-46DE-9CC6-087611C09D8C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E8BD6057-EA58-46DE-9CC6-087611C09D8C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E8BD6057-EA58-46DE-9CC6-087611C09D8C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FE1B0E50-00C4-4723-9347-A6BFC907FC4D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FE1B0E50-00C4-4723-9347-A6BFC907FC4D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FE1B0E50-00C4-4723-9347-A6BFC907FC4D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FE1B0E50-00C4-4723-9347-A6BFC907FC4D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
