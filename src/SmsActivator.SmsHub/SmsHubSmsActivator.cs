@@ -5,12 +5,17 @@ namespace SmsActivator.SmsHub;
 
 public class SmsHubSmsActivator : ISmsActivator
 {
-    private static readonly HttpClient Client = new();
     private readonly SmsHubSmsActivatorOptions _options;
     private readonly IServiceNameResolver _serviceNameResolver;
+    private readonly HttpClient _client;
 
-    public SmsHubSmsActivator(IOptions<SmsHubSmsActivatorOptions> options, IServiceNameResolver serviceNameResolver)
+    public SmsHubSmsActivator(
+        HttpClient client,
+        IOptions<SmsHubSmsActivatorOptions> options,
+        IServiceNameResolver serviceNameResolver
+    )
     {
+        _client = client;
         _serviceNameResolver = serviceNameResolver;
         _options = options.Value;
     }
@@ -22,7 +27,7 @@ public class SmsHubSmsActivator : ISmsActivator
         if (_options.BaseUrl == null)
             throw new ArgumentNullException(nameof(_options.BaseUrl));
 
-        var responseMessage = await Client.GetAsync(
+        var responseMessage = await _client.GetAsync(
             $"{_options.BaseUrl}?api_key={_options.ApiToken}" +
             $"&action=getNumber&service={_serviceNameResolver.ResolveServiceName(parameters.Service)}" +
             $"&operator={parameters.Operator}" +
