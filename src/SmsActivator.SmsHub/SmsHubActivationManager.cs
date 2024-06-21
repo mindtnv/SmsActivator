@@ -4,18 +4,24 @@ namespace SmsActivator.SmsHub;
 
 public class SmsHubActivationManager : IActivationManager
 {
-    private static readonly HttpClient Client = new();
     private readonly SmsHubSmsActivatorOptions _options;
     private bool _disposed;
     public bool CodeReceived { get; private set; }
+    private readonly HttpClient _httpClient;
 
-    public SmsHubActivationManager(string phone, string id, ActivationParameters activationParameters,
-        SmsHubSmsActivatorOptions options)
+    public SmsHubActivationManager(
+        string phone,
+        string id,
+        ActivationParameters activationParameters,
+        SmsHubSmsActivatorOptions options,
+        HttpClient? httpClient = default
+    )
     {
         Phone = phone;
         Id = id;
         ActivationParameters = activationParameters;
         _options = options;
+        _httpClient = httpClient ?? new HttpClient();
     }
 
     public string Phone { get; }
@@ -36,10 +42,10 @@ public class SmsHubActivationManager : IActivationManager
                 throw new TaskCanceledException();
             }
 
-            var responseMessage = await Client.GetAsync($"{_options.BaseUrl}?" +
-                                                        $"api_key={_options.ApiToken}" +
-                                                        "&action=getStatus" +
-                                                        $"&id={Id}", cancellationToken);
+            var responseMessage = await _httpClient.GetAsync($"{_options.BaseUrl}?" +
+                                                             $"api_key={_options.ApiToken}" +
+                                                             "&action=getStatus" +
+                                                             $"&id={Id}", cancellationToken);
             var response = await responseMessage.Content.ReadAsStringAsync(cancellationToken);
             var data = response.Split(':');
             try
@@ -84,11 +90,11 @@ public class SmsHubActivationManager : IActivationManager
     private async Task SetStatus(string status)
     {
         //https://smshub.org/stubs/handler_api.php?api_key=APIKEY&action=setStatus&status=STATUS&id=ID
-        var responseMessage = await Client.GetAsync($"{_options.BaseUrl}?" +
-                                                    $"api_key={_options.ApiToken}" +
-                                                    "&action=setStatus" +
-                                                    $"&status={status}" +
-                                                    $"&id={Id}");
+        var responseMessage = await _httpClient.GetAsync($"{_options.BaseUrl}?" +
+                                                         $"api_key={_options.ApiToken}" +
+                                                         "&action=setStatus" +
+                                                         $"&status={status}" +
+                                                         $"&id={Id}");
         var response = await responseMessage.Content.ReadAsStringAsync();
         var data = response.Split(':');
         if (!data[0].StartsWith("ACCESS"))
