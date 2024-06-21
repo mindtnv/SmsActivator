@@ -38,7 +38,7 @@ public class SmsHubSmsActivator : ISmsActivator
         try
         {
             if (string.Compare(data[0], "ACCESS_NUMBER", StringComparison.OrdinalIgnoreCase) == 0)
-                return new SmsHubActivationManager(data[2], data[1], parameters, _options);
+                return new SmsHubActivationManager(data[2], data[1], parameters, _options, _client);
         }
         catch (Exception)
         {
